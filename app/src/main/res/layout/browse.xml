@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp">
+
+    <ImageView android:id="@+id/thumbnail"
+
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitStart"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:src="@drawable/placeholder"/>
+    <TextView android:id="@+id/browse_name"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/PrimaryTextColor"
+        android:maxLines="3"
+        android:text="Siriphong"
+        android:paddingTop="15dp"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+   <!-- <TextView
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="300"
+        android:textSize="20dp"
+        android:textColor="@color/md_red_700"
+        android:textStyle="bold"
+        android:id="@+id/browse_cost"/>-->
+    <TextView
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:text="X"
+        android:textSize="20dp"
+        android:textColor="@color/material_deep_teal_200"/>
+
+    <TextView
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/browse_number"
+        android:text="3"
+        android:textSize="15dp"/>
+    <TextView
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="300"
+        android:textSize="20dp"
+        android:textColor="@color/md_red_700"
+        android:textStyle="bold"
+        android:id="@+id/browse_total_cost"/>
+    <!--<Button
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/Delete"
+        android:text="Delete"
+        />-->
+
+</LinearLayout>

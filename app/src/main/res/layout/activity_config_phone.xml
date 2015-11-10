@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity"
+    android:background="@color/primary_dark_material_dark">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:paddingLeft="20px"
+        android:paddingRight="20px"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+        <EditText
+           android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:id="@+id/edittext_name"
+            android:gravity="center"
+            android:hint="Your Name"
+            android:paddingBottom="10dp"
+            android:background="@color/md_white_1000" />
+
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <EditText
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:paddingBottom="10dp"
+            android:id="@+id/edittext_phone"
+            android:hint="Your Phone Number"
+            android:gravity="center"
+            android:background="@drawable/rounded_edittext_down"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Confirm"
+            android:id="@+id/confirm_phone_button"
+            android:background="@color/md_green_200"/>
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
