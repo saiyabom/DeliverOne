@@ -49,6 +49,8 @@ public class AppConstant {
     public static final String PREF_MAPS_LAT = "PREF_MAPS_LAT";
     public static final String PREF_MAPS_LONG = "PREF_MAPS_LONG";
 
+    public static final String MISS_LOCATION="MISS_LOCATION";
+
 
 }
 

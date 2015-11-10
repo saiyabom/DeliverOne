@@ -100,45 +100,42 @@ public class SummaryActivity extends BaseActivity{
 
             @Override
             public void onResponse(Response response) throws IOException {
-                Log.v("Response Message", response.body().string());
-                toCost(response.body().string());
+                int food_cost;
+                int delivery_cost;
+                int total;
+                String result = response.body().string().toString();
+                //Log.v("Response Message", response.body().string());
+                //toCost(response.body().string());
+                JSONObject jsonObject= null;
+                try {
+                    String test = result;
+                    jsonObject = new JSONObject(test);
+                    food_cost = jsonObject.getInt("food_cost");
+                    delivery_cost = jsonObject.getInt("delivery_cost");
+                    total = food_cost + delivery_cost;
+                    Log.v(LOG_TAG, "Json result: food_cost= " + food_cost);
+                    if(total !=0){
+                        costTotalText.setText(Integer.toString(total));
+                        costDeliver.setText(Integer.toString(delivery_cost));
+                    }
+                    else{
+                        startShoppingActivity();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
 
 
             }
         });
 
     }
-    public void toCost(String datas)  {
-        String food_cost;
-        String delivery_cost;
-        String total;
-
-        Log.v("TEST",datas);
-        try {
-            JSONObject jsonObject= new JSONObject(datas);
-            food_cost = jsonObject.getString("food_cost");
-            delivery_cost = jsonObject.getString("delivery_cost");
-            total = food_cost + delivery_cost;
-
-            Log.v("JSON", jsonObject.toString());
-            //costTotalText.setText(Integer.toString(total));
-            costDeliver.setText(delivery_cost);
-
-
-           /* if(total == 0){
-                //Toast.makeText(SummaryActivity.this,"Not found Shop",Toast.LENGTH_SHORT);
-                Intent intent = new Intent(SummaryActivity.this,ShoppingCartActivity.class);
-                startActivity(intent);
-            }else {
-
-            }*/
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        //Log.v(LOG_TAG,"senst: "+food_cost+ "& delivery_cost:" +delivery_cost);
-
-
+    public void startShoppingActivity()  {
+                    Intent intent = new Intent(SummaryActivity.this,ShoppingCartActivity.class);
+                    intent.putExtra(AppConstant.MISS_LOCATION,true);
+                    startActivity(intent);
 
     }
     public void sendConfirmAll(){

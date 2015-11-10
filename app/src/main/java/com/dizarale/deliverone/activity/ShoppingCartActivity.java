@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.dizarale.deliverone.adapter.SimpleItemTouchHelperCallback;
 import com.dizarale.deliverone.R;
+import com.dizarale.deliverone.config.AppConstant;
 import com.dizarale.deliverone.config.AppSharedPreferences;
 import com.dizarale.deliverone.object.ShoppingCart;
 import com.dizarale.deliverone.recyclerview.RecyclerItemClickListener;
@@ -51,6 +52,8 @@ public class ShoppingCartActivity extends BaseActivity{
     private Button locationButton;
     Intent intent;
 
+    boolean faulty;
+
 
 
     private RecyclerView.LayoutManager mLayoutManager;
@@ -71,6 +74,9 @@ public class ShoppingCartActivity extends BaseActivity{
         setContentView(R.layout.activity_shopping_cart);
         mShoppingCartList = new ArrayList<ShoppingCart>();
         actAsShoppingCart();
+        Intent intentFromMapFault = getIntent();
+        faulty = intentFromMapFault.getBooleanExtra(AppConstant.MISS_LOCATION,false);
+
 
         activateToolbarWithHomeEnabled();
 
@@ -89,9 +95,7 @@ public class ShoppingCartActivity extends BaseActivity{
         intent = new Intent(this, MapsActivity.class);
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                startActivity(intent);
+            public void onClick(View v) {startActivity(intent);
             }
         });
     }
@@ -100,6 +104,9 @@ public class ShoppingCartActivity extends BaseActivity{
     protected void onResume() {
         super.onResume();
         initData();
+        if(faulty){
+            Toast.makeText(ShoppingCartActivity.this,"This location is not My Service Area",Toast.LENGTH_LONG).show();
+        }
         //getListShoppingCart();
 
 

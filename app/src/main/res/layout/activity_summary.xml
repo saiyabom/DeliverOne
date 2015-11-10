@@ -11,13 +11,10 @@
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingBottom="20dp"
+    <RelativeLayout
         android:layout_below="@+id/app_bar"
-        android:layout_alignParentStart="true">
+        android:id="@+id/deliver_box"
+        style="@style/show_box">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,37 +26,22 @@
             />
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="="
-            android:layout_alignRight="@id/number_of_item_text"
-            android:textSize="25dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="300"
-            android:textSize="40dp"
-            android:textColor="@color/md_red_800"
+            android:textSize="35dp"
             android:textStyle="bold"
-            android:layout_alignParentRight="true"
             android:paddingRight="20dp"
             android:paddingBottom="10dp"
-            android:id="@+id/deliver_cost"
+            android:layout_below="@+id/number_of_item_text"
+            android:layout_toEndOf="@+id/number_of_item_text"
+            android:text="300"
+            android:textColor="@color/md_red_800"
+            android:id="@+id/deliver_cost"/>
 
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingTop="20dp"
-
-        android:id="@+id/linearLayout"
-        android:layout_above="@+id/detail_text"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="54dp">
-
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/total_box"
+        android:layout_below="@+id/deliver_box"
+        style="@style/show_box">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,78 +50,25 @@
             android:textSize="25dp"
             android:paddingRight="100dp"
             android:id="@+id/cost_total_text"
-            android:layout_alignTop="@+id/textView"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="="
-
-            android:textSize="25dp"
-            android:id="@+id/textView" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="300"
-            android:textColor="@color/md_blue_800"
-            android:textSize="50dp"
-
-            android:paddingRight="10dp"
-            android:id="@+id/total_cost"/>
-
-    </LinearLayout>
-    <!--<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingBottom="20dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Location"
-            android:textSize="25dp"
-            android:id="@+id/location_text"
-            android:paddingRight="120dp"
-
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="="
-            android:layout_alignRight="@id/location_text"
-            android:textSize="25dp"
-            />
+            android:layout_alignParentStart="false" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="300"
-            android:textSize="40dp"
-            android:textColor="@color/md_red_800"
+            android:textSize="35dp"
             android:textStyle="bold"
-            android:layout_alignParentRight="true"
             android:paddingRight="20dp"
             android:paddingBottom="10dp"
-            android:id="@+id/location"
+            android:layout_below="@+id/cost_total_text"
+            android:layout_toEndOf="@+id/cost_total_text"
+            android:text="240"
+            android:textColor="@color/md_blue_800"
+            android:id="@+id/total_cost"
+             />
 
-            />
-
-    </RelativeLayout>-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
     </RelativeLayout>
-    <!--<TextView
-        android:layout_width="300dp"
-        android:textSize="20dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/detail_text"
-        android:text="sdlfjweiofn;klasdjfkldsjgklasjng;klasj"
-        android:paddingLeft="20dp"
 
-        android:id="@+id/detail" />-->
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -166,5 +95,7 @@
         android:paddingBottom="10dp"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true" />
+
+
 
 </RelativeLayout>
