@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -84,8 +85,12 @@ public class MainActivity extends BaseActivity {
         return true;
     }
     private void configLayoutPhone(){
+        String oldPhone =AppSharedPreferences.getPhone(MainActivity.this);
+        String oldName = AppSharedPreferences.getName(MainActivity.this);
         final EditText editName = (EditText) findViewById(R.id.edittext_name);
+        editName.setText(oldName);
         final EditText editPhone = (EditText) findViewById(R.id.edittext_phone);
+        editPhone.setText(oldPhone);
         Button confirm = (Button) findViewById(R.id.confirm_phone_button);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override

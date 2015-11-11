@@ -38,14 +38,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     // Operation type (what is being executed)
     public static final int MENU = 0;
-    public static final int FOOD_DETAIL=1;
-    public static final int SHOPPING_CART = 2;
-    public static final int MAP = 3;
-    public static final int SUMMARY = 4;
-    public static final int SETTINGS = 5;
-
-
-
+    public static final int FOOD_DETAIL=5;
+    public static final int SHOPPING_CART = 6;
+    public static final int MAP = 7;
+    public static final int SUMMARY = 8;
+    public static final int SETTINGS = 9;
 
 
     //Menu Catagories List
@@ -163,7 +160,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                     break;
                 case FOOD_DETAIL:
                     getSupportActionBar().setTitle(mTitle);
-
                     break;
             }
 

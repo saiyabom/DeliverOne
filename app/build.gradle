@@ -31,20 +31,21 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v4:22.+'
-    compile 'com.android.support:appcompat-v7:22.+'
-    compile 'com.android.support:recyclerview-v7:22.+'
-    compile 'com.android.support:cardview-v7:22.+'
-    compile 'com.squareup.picasso:picasso:2.5.+'
 
+
+
+
+    compile 'com.android.support:support-v4:22.2.1'
+    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.android.support:recyclerview-v7:22.2.1'
+    compile 'com.android.support:cardview-v7:22.2.1'
+    compile 'com.squareup.picasso:picasso:2.5.+'
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta1'
     compile 'com.squareup.retrofit:converter-gson:2.0.0-beta1'
-
     compile 'com.google.android.gms:play-services-location:8.1.0'
-    compile 'com.google.android.gms:play-services:8.1.0'
-
+    compile 'com.google.android.gms:play-services:8.3.0'
     compile 'com.embarkmobile:zxing-android-minimal:2.0.0@aar'
     compile 'com.embarkmobile:zxing-android-integration:2.0.0@aar'
     compile 'com.google.zxing:core:3.0.1'
-
+    compile 'com.android.support:design:22.2.1'
 }

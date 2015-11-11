@@ -70,13 +70,12 @@ public class ShoppingCartActivity extends BaseActivity{
         super.testPhone = AppSharedPreferences.getPhone(ShoppingCartActivity.this);
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");
-        pDialog.setCancelable(false);
+        pDialog.setCancelable(true);
         setContentView(R.layout.activity_shopping_cart);
         mShoppingCartList = new ArrayList<ShoppingCart>();
         actAsShoppingCart();
         Intent intentFromMapFault = getIntent();
         faulty = intentFromMapFault.getBooleanExtra(AppConstant.MISS_LOCATION,false);
-
 
         activateToolbarWithHomeEnabled();
 
@@ -112,6 +111,7 @@ public class ShoppingCartActivity extends BaseActivity{
 
     }
     private void getListShoppingCart(){
+        showpDialog();
         Call<List<ShoppingCart>> callShoppingCart = service.loadListShoppingCart(testPhone);
         callShoppingCart.enqueue(new Callback<List<ShoppingCart>>() {
             @Override
@@ -127,6 +127,8 @@ public class ShoppingCartActivity extends BaseActivity{
 
                 }
                 mShoppingCartAdapter.loadNewData(response.body());
+
+                hidepDialog();
             }
 
             @Override
@@ -140,13 +142,16 @@ public class ShoppingCartActivity extends BaseActivity{
         Intent intent = getIntent();
         String urlQrCode = intent.getStringExtra(Intents.Scan.RESULT);
         if (null != intent && urlQrCode != null) {
-            showpDialog();
+            //showpDialog();
+            if(!urlQrCode.contains("http://")){
+                urlQrCode="http://"+urlQrCode;
+            }
             if (urlQrCode.contains("um-project.com/projectx/")) {
-
-                sendOrderOverQRCodeResult(intent.getStringExtra(Intents.Scan.RESULT));
+                sendOrderOverQRCodeResult(urlQrCode);
             } else {
                 Toast.makeText(ShoppingCartActivity.this, "URL from QR Code is wrong: "+urlQrCode, Toast.LENGTH_LONG).show();
                 getListShoppingCart();
+
             }
         }
             /*tvResult.setText(intent.getStringExtra(Intents.Scan.RESULT));
@@ -158,6 +163,7 @@ public class ShoppingCartActivity extends BaseActivity{
 
 
     private void sendOrderOverQRCodeResult(String result){
+
         RequestBody formBody = new FormEncodingBuilder()
                 .add("cus_tel", testPhone).build();
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -169,6 +175,7 @@ public class ShoppingCartActivity extends BaseActivity{
             public void onFailure(Request request, IOException e) {
                 Toast.makeText(ShoppingCartActivity.this,"Fail QRCode request no response",Toast.LENGTH_LONG).show();
                 getListShoppingCart();
+                hidepDialog();
             }
 
             @Override
@@ -258,11 +265,9 @@ public class ShoppingCartActivity extends BaseActivity{
             startActivity(intent);
             return true;
         }
-        /*if (id == R.id.action_maps){
-            Intent intent = new Intent(this, MapsActivity.class);
-            startActivity(intent);
-            return true;
-        }*/
+        if (id == R.id.action_qr_code){
+            callCapture(null);
+        }
 
         return super.onOptionsItemSelected(item);
     }

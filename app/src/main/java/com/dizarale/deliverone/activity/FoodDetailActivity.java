@@ -162,6 +162,7 @@ public class FoodDetailActivity extends BaseActivity {
 
                     hidepDialog();
                     startActivity(intent);
+                    finish();
                 }
                 Log.v(LOG_TAG, response.toString());
             }

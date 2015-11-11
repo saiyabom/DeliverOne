@@ -30,4 +30,5 @@
 
     <!-- ##### zxing-lib-example ##### -->
     <dimen name="margin_5">5.0dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

@@ -1,5 +1,6 @@
 package com.dizarale.deliverone.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,27 +45,38 @@ public class SummaryActivity extends BaseActivity{
 
     private String latitude,longitude;
 
+    private Intent intent;
+    private ProgressDialog pDialog;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Please wait...");
+        pDialog.setCancelable(true);
+
         setContentView(R.layout.activity_summary);
         super.testPhone = AppSharedPreferences.getPhone(SummaryActivity.this);
 
         confirmButton = (Button) findViewById(R.id.send_order_button);
-        costTotalText = (TextView) findViewById(R.id.total_cost);
 
-        costDeliver = (TextView) findViewById(R.id.deliver_cost);
 
 
         actAsSummary();
         activateToolbarWithHomeEnabled();
         commentOrder = (EditText) findViewById(R.id.comment_order);
 
-        Intent intent = getIntent();
+        this.intent = getIntent();
         latitude = intent.getStringExtra("latitude");
         longitude = intent.getStringExtra("longitude");
+        costTotalText = (TextView) findViewById(R.id.total_cost);
+
+
+        costDeliver = (TextView) findViewById(R.id.deliver_cost);
+
+
 
 
         toastsuccess = Toast.makeText(this,"Confirm OK", Toast.LENGTH_LONG );
@@ -83,7 +95,7 @@ public class SummaryActivity extends BaseActivity{
 
 
     }
-    public void postLatLong(String lat, String lon) {
+    /*public void postLatLong(String lat, String lon) {
 
         RequestBody formBody = new FormEncodingBuilder()
                 .add("cus_tel", super.testPhone).add("order_lat", lat)
@@ -115,8 +127,9 @@ public class SummaryActivity extends BaseActivity{
                     total = food_cost + delivery_cost;
                     Log.v(LOG_TAG, "Json result: food_cost= " + food_cost);
                     if(total !=0){
-                        costTotalText.setText(Integer.toString(total));
-                        costDeliver.setText(Integer.toString(delivery_cost));
+
+                        SummaryActivity.this.costTotalText.setText(Integer.toString(total));
+                        SummaryActivity.this.costDeliver.setText(Integer.toString(delivery_cost));
                     }
                     else{
                         startShoppingActivity();
@@ -132,12 +145,7 @@ public class SummaryActivity extends BaseActivity{
         });
 
     }
-    public void startShoppingActivity()  {
-                    Intent intent = new Intent(SummaryActivity.this,ShoppingCartActivity.class);
-                    intent.putExtra(AppConstant.MISS_LOCATION,true);
-                    startActivity(intent);
-
-    }
+    */
     public void sendConfirmAll(){
         RequestBody formBody = new FormEncodingBuilder()
                 .add(CUS_TEL, super.testPhone)
@@ -153,16 +161,15 @@ public class SummaryActivity extends BaseActivity{
 
             @Override
             public void onResponse(Response response) throws IOException {
-                Intent intent = new Intent(SummaryActivity.this, MenuActivity.class);
-                startActivity(intent);
+
                 if (response != null) {
                     String res = response.body().string();
                     if (res.contains("confirm OK")) {
-                        toastsuccess.show();
+                        Intent intent = new Intent(SummaryActivity.this, MenuActivity.class);
+                        startActivity(intent);
 
 
                     } else if (res.contains("not find")) {
-                        toastfail.show();
                         Log.v(LOG_TAG, res);
 
                     } else {
@@ -178,7 +185,9 @@ public class SummaryActivity extends BaseActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        postLatLong(latitude, longitude);
+        //postLatLong(latitude, longitude);
+        costDeliver.setText(this.intent.getStringExtra("delivery_cost"));
+        costTotalText.setText(this.intent.getStringExtra("total"));
 
 
     }
@@ -213,6 +222,15 @@ public class SummaryActivity extends BaseActivity{
         }*/
 
         return super.onOptionsItemSelected(item);
+    }
+    private void showpDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hidepDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
     }
 
 

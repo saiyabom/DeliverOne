@@ -1,6 +1,7 @@
 package com.dizarale.deliverone.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,6 +36,7 @@ public class MenuActivity extends BaseActivity {
     private FoodItemRecyclerViewAdapter mRecyclerViewAdapter;
     private String mType;
     private static final int REQUEST_CODE = 200;
+    private ProgressDialog pDialog;
 
 
 
@@ -45,6 +47,9 @@ public class MenuActivity extends BaseActivity {
         mType = String.valueOf(BaseActivity.mType);
         activateToolbar();
         setUpNavigationDrawer();
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Please wait...");
+        pDialog.setCancelable(true);
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
@@ -154,6 +159,15 @@ public class MenuActivity extends BaseActivity {
                     break;
             }
         }
+    }
+    private void showpDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hidepDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.dizarale.deliverone.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,14 +39,19 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback{
     private MarkerOptions markerOptions;
     OkHttpClient okHttpClient;
 
+
     private Button confirmButton;
     private LatLng latLng;
     private boolean checkButtonClick = true;
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         actAsMaps();
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Please wait...");
+        pDialog.setCancelable(true);
         activateToolbarWithHomeEnabled();
         markerOptions = new MarkerOptions();
 
@@ -59,6 +65,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback{
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 confirmLocation();
             }
         });
@@ -94,9 +101,9 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback{
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMyLocationEnabled(true);
-        LatLng PERTH = new LatLng((double) 0, (double) 0);
+        latLng = new LatLng((double) 0, (double) 0);
 
-        mMap.addMarker(new MarkerOptions().position(PERTH).draggable(true));
+        mMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
 
         mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
             @Override
@@ -106,7 +113,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback{
                 if (mMap.getMyLocation() != null) {
                     mMap.clear();
                     Log.v("Onclick", "Cando");
-
                     latLng = new LatLng(mMap.getMyLocation().getLatitude(), mMap.getMyLocation().getLongitude());
                     if (latLng != null) {
                         mMap.addMarker(markerOptions.position(latLng).draggable(true));
@@ -120,6 +126,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback{
                 return false;
             }
         });
+
         mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
             @Override
             public void onMarkerDragStart(Marker marker) {
@@ -140,15 +147,96 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback{
 
             }
         });
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLngs) {
+                mMap.clear();
+                Log.v("Onclick", "Cando");
+                //latLng = new LatLng(mMap.getMyLocation().getLatitude(), mMap.getMyLocation().getLongitude());
+                if (latLngs != null) {
+                    mMap.addMarker(markerOptions.position(latLngs).draggable(true));
+
+                }
+                latLng = latLngs;
+
+
+            }
+
+        });
 
     }
     public void confirmLocation(){
+        postLatLong(Double.toString(latLng.latitude), Double.toString(latLng.longitude));
+    }
+    public void postLatLong(String lat, String lon) {
+        showpDialog();
 
-        Intent intent = new Intent(MapsActivity.this, SummaryActivity.class);
-        intent.putExtra("latitude",Double.toString(latLng.latitude));
-        intent.putExtra("longitude", Double.toString(latLng.longitude));
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("cus_tel", super.testPhone).add("order_lat", lat)
+                .add("order_long", lon)
+                .add("order_detail","").build();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request.Builder builder = new Request.Builder();
+        Request request = builder.url(BASE_URL + "/preorderdetaildistance").post(formBody).build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                Log.d(LOG_TAG, e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                int food_cost;
+                int delivery_cost;
+                int total;
+                String result = response.body().string().toString();
+                //Log.v("Response Message", response.body().string());
+                //toCost(response.body().string());
+                JSONObject jsonObject = null;
+                try {
+                    String test = result;
+                    jsonObject = new JSONObject(test);
+                    food_cost = jsonObject.getInt("food_cost");
+                    delivery_cost = jsonObject.getInt("delivery_cost");
+                    total = food_cost + delivery_cost;
+                    if (total == 0) {
+                        startShoppingActivity();
+                    } else {
+                        hidepDialog();
+                        Intent intent = new Intent(MapsActivity.this, SummaryActivity.class);
+                        intent.putExtra("latitude", Double.toString(latLng.latitude));
+                        intent.putExtra("longitude", Double.toString(latLng.longitude));
+                        intent.putExtra("total", Integer.toString(total));
+                        intent.putExtra("delivery_cost", Integer.toString(delivery_cost));
+                        startActivity(intent);
+
+                    }
+                    Log.v(LOG_TAG, "Json result: food_cost= " + food_cost);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
+
+    }
+    public void startShoppingActivity()  {
+        Intent intent = new Intent(MapsActivity.this,ShoppingCartActivity.class);
+        intent.putExtra(AppConstant.MISS_LOCATION,true);
         startActivity(intent);
 
+    }
+    private void showpDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hidepDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
     }
 
 
