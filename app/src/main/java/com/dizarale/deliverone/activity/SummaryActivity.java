@@ -148,7 +148,7 @@ public class SummaryActivity extends BaseActivity{
     */
     public void sendConfirmAll(){
         RequestBody formBody = new FormEncodingBuilder()
-                .add(CUS_TEL, super.testPhone)
+                .add(CUS_TEL, testPhone)
                 .add(ORDER_DETAIL, commentOrder.getText().toString()).build();
         OkHttpClient okHttpClient = new OkHttpClient();
         Request.Builder builder = new Request.Builder();
@@ -167,6 +167,7 @@ public class SummaryActivity extends BaseActivity{
                     if (res.contains("confirm OK")) {
                         Intent intent = new Intent(SummaryActivity.this, MenuActivity.class);
                         startActivity(intent);
+                        finish();
 
 
                     } else if (res.contains("not find")) {

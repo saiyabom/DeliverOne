@@ -103,24 +103,6 @@
             android:exported="false" >
         </service>
 
-        <activity
-            android:name=".activity.StatusOrderActivity"
-            android:label="@string/title_activity_status_order"
-            android:parentActivityName=".activity.MenuActivity"
-            android:theme="@style/AppTheme" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dizarale.deliverone.activity.MenuActivity" />
-        </activity>
-        <activity
-            android:name=".activity.CurrentOrderActivity"
-            android:label="@string/title_activity_current_order"
-            android:parentActivityName=".activity.MenuActivity"
-            android:theme="@style/AppTheme" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dizarale.deliverone.activity.MenuActivity" />
-        </activity>
     </application>
 
 </manifest>

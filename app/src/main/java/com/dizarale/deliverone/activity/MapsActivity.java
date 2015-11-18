@@ -54,6 +54,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback{
         pDialog.setCancelable(true);
         activateToolbarWithHomeEnabled();
         markerOptions = new MarkerOptions();
+        super.testPhone = AppSharedPreferences.getPhone(MapsActivity.this);
 
         setContentView(R.layout.activity_maps);
         okHttpClient = new OkHttpClient();
@@ -172,7 +173,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback{
         showpDialog();
 
         RequestBody formBody = new FormEncodingBuilder()
-                .add("cus_tel", super.testPhone).add("order_lat", lat)
+                .add("cus_tel", testPhone).add("order_lat", lat)
                 .add("order_long", lon)
                 .add("order_detail","").build();
         OkHttpClient okHttpClient = new OkHttpClient();
