@@ -33,6 +33,7 @@ public class AppConstant {
     public static final String MAP = "Map";
     public static final String SHOPPING_CART = "Shopping Cart";
     public static final String SUMMARY = "Summary";
+    public static final String HISTORY_ORDER = "History";
 
     // Drawer labels // CATOGORIES OF MENU
     public static final String DRAWER_HOME = "HOME";
@@ -45,11 +46,15 @@ public class AppConstant {
     public static final String DRAWER_SETTINGS = "Settings";
     public static final String DRAWER_HELP_AND_FEEDBACK = "Help & Feedback";
 
+    public static final String DRAWER_HISTORY_ORDER = "History";
+
 
     public static final String PREF_MAPS_LAT = "PREF_MAPS_LAT";
     public static final String PREF_MAPS_LONG = "PREF_MAPS_LONG";
 
     public static final String MISS_LOCATION="MISS_LOCATION";
+
+
 
 
 }

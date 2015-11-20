@@ -2,15 +2,14 @@ package com.dizarale.deliverone.config;
 
 import com.dizarale.deliverone.object.FoodItem;
 import com.dizarale.deliverone.object.Order;
+import com.dizarale.deliverone.object.OrderStatusObject;
 import com.dizarale.deliverone.object.ShoppingCart;
 
 import java.util.List;
 import java.util.Map;
 
 import retrofit.Call;
-import retrofit.Response;
 import retrofit.http.Body;
-import retrofit.http.FieldMap;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
@@ -51,5 +50,9 @@ public interface APIService {
     Call<Order> loadOrderDetail(
             @Query("cus_tel") String phone
     );
+
+    @GET("userorder")
+    Call<List<OrderStatusObject>>
+    loadUserOrder(@Query("cus_tel") String cus_tel);
 
 }

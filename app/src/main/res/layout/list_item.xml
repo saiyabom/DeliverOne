@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="55dip"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cost_menu"
+        android:text="100B"
+        android:layout_gravity="right|center_vertical"
+        android:paddingRight="20dp"/>
+
+    <TextView
+        android:id="@+id/lblListItem"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="17dip"
+
+        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+        android:text="Stek"
+        android:layout_gravity="left|center_vertical" />
+
+</FrameLayout>

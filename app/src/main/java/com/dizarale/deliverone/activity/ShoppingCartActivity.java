@@ -111,7 +111,7 @@ public class ShoppingCartActivity extends BaseActivity{
 
     }
     private void getListShoppingCart(){
-        showpDialog();
+
         Call<List<ShoppingCart>> callShoppingCart = service.loadListShoppingCart(testPhone);
         callShoppingCart.enqueue(new Callback<List<ShoppingCart>>() {
             @Override
@@ -158,7 +158,10 @@ public class ShoppingCartActivity extends BaseActivity{
             tvResultFormat.setText(intent.getStringExtra(Intents.Scan.RESULT_FORMAT));
             tvUri.setText(intent.toUri(intent.getFlags()));*/
 
-        else getListShoppingCart();
+        else {
+            showpDialog();
+            getListShoppingCart();
+        }
     }
 
 

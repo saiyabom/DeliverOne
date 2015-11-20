@@ -43,6 +43,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public static final int MAP = 7;
     public static final int SUMMARY = 8;
     public static final int SETTINGS = 9;
+    public static final int HISTORY_ORDER=10;
 
 
     //Menu Catagories List
@@ -112,6 +113,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         mType = DRINK;
         mTitle = AppConstant.DRAWER_DRINK;
     }
+    public void actAsHistoryOrder(){
+        mType = HISTORY_ORDER;
+        mTitle = AppConstant.HISTORY_ORDER;
+    }
 
     public Toolbar activateToolbar(){
         if(mToolbar == null){
@@ -161,19 +166,9 @@ public abstract class BaseActivity extends AppCompatActivity {
                 case FOOD_DETAIL:
                     getSupportActionBar().setTitle(mTitle);
                     break;
-            }
-
-        }
-        return mToolbar;
-    }
-    public Toolbar activateToolbarWithHomeEnabled(String name){
-        activateToolbar();
-        if(mToolbar !=null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            if(mType == FOOD_DETAIL){
-                getSupportActionBar().setTitle(name);
-            }else{
-                getSupportActionBar().setTitle(AppConstant.FOOD_DETAIL);
+                case HISTORY_ORDER:
+                    getSupportActionBar().setTitle(mTitle);
+                    break;
             }
 
         }
@@ -198,7 +193,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_send, AppConstant.DRAWER_SWEET));
         items.add(new NavigationDrawerItem(android.R.drawable.ic_btn_speak_now, AppConstant.DRAWER_DRINK));
         items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_preferences, AppConstant.DRAWER_SETTINGS));
-        items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_help, AppConstant.DRAWER_HELP_AND_FEEDBACK));
+        items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_help, AppConstant.DRAWER_HISTORY_ORDER));
 
         mDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         mDrawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
@@ -236,9 +231,10 @@ public abstract class BaseActivity extends AppCompatActivity {
                         AppSharedPreferences.setHasPhoneNumber(BaseActivity.this,AppConstant.PREF_PHONE,false);
                         mNextActivity = MainActivity.class;
                         break;
-                    /*case 6:
-                        mNextActivity = HelpFeedActivity.class;
-                        break;*/
+                    case 6:
+                        mNextActivity = HistoryOrderAcitvity.class;
+                        actAsHistoryOrder();
+                        break;
                     /*default:
                         mNextActivity = HelpFeedActivity.class;
                         break;*/
