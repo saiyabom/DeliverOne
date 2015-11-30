@@ -164,7 +164,7 @@ public class SummaryActivity extends BaseActivity{
 
                 if (response != null) {
                     String res = response.body().string();
-                    if (res.contains("confirm OK")) {
+                    if (res.contains("delete order suc")) {
                         Intent intent = new Intent(SummaryActivity.this, MenuActivity.class);
                         startActivity(intent);
                         finish();

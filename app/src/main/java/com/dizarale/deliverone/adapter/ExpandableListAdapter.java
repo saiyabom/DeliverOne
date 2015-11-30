@@ -63,7 +63,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         txtListChild.setText(menu.getMenuName());
         if(menu.getMenuName().contains("delivery")){
             costMenu.setText(menu.getMenuCost()+"B");
-        }else costMenu.setText(menu.getMenuCost()+"B x "+menu.getMenuNum());
+        }else {
+            costMenu.setText(menu.getMenuCost()+"B x "+menu.getMenuNum());
+            costMenu.setTextColor(_context.getResources().getColor(R.color.material_blue_grey_950));
+        }
         return convertView;
     }
 

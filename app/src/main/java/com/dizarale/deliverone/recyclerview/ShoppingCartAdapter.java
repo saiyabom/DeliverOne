@@ -1,6 +1,8 @@
 package com.dizarale.deliverone.recyclerview;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.dizarale.deliverone.R;
@@ -50,9 +53,10 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
     @Override
     public void onItemDismiss(int position) {
-        postToDelete(mShoppingCartList.get(position));
+        /*postToDelete(mShoppingCartList.get(position));
         mShoppingCartList.remove(position);
-        notifyItemRemoved(position);
+        notifyItemRemoved(position);*/
+        open(position);
 
     }
    public boolean postToDelete(final ShoppingCart item){
@@ -174,5 +178,29 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     }
     public ShoppingCart getFoodItem(int position) {
         return (null != mShoppingCartList ? mShoppingCartList.get(position) : null);
+    }
+    public void open(final int pos){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+        alertDialogBuilder.setMessage("Are you sure,You wanted to delete");
+
+        alertDialogBuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                postToDelete(mShoppingCartList.get(pos));
+                mShoppingCartList.remove(pos);
+                notifyItemRemoved(pos);
+                Toast.makeText(mContext, "You clicked yes button", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                loadNewData(mShoppingCartList);
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }
