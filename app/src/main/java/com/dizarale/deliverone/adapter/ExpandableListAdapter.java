@@ -1,6 +1,7 @@
 package com.dizarale.deliverone.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,10 +64,17 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         txtListChild.setText(menu.getMenuName());
         if(menu.getMenuName().contains("delivery")){
             costMenu.setText(menu.getMenuCost()+"B");
+            txtListChild.setTextColor(_context.getResources().getColor(R.color.material_blue_grey_950));
+        }else if(menu.getMenuName().equals("CODE")){
+            costMenu.setText(menu.getMenuCost());
+            txtListChild.setTextColor(_context.getResources().getColor(R.color.md_deep_orange_A400));
+            costMenu.setTextColor(_context.getResources().getColor(R.color.md_deep_orange_A400));
         }else {
-            costMenu.setText(menu.getMenuCost()+"B x "+menu.getMenuNum());
+            costMenu.setText(menu.getMenuCost() + "B x " + menu.getMenuNum());
+            txtListChild.setTextColor(_context.getResources().getColor(R.color.material_blue_grey_950));
             costMenu.setTextColor(_context.getResources().getColor(R.color.material_blue_grey_950));
         }
+
         return convertView;
     }
 

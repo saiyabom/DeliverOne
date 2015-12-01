@@ -12,6 +12,7 @@
     <color name="SecondaryBackgroundColor">@color/description_color</color>
     <color name="ColorBackgroundAccent">#FF9922</color>
     <color name="BackgroundColor">#FAFAFA</color>
+    <color name="TransparentBackgroundText">#30000000</color>
 
 
 

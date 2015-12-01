@@ -23,4 +23,19 @@
     <string name="title_activity_status_order">StatusOrderActivity</string>
     <string name="title_activity_current_order">CurrentOrderActivity</string>
     <string name="title_activity_history_order">HistoryOrderActivity</string>
+
+    <string name="text_response_code_confirmation">Your Confirmation Code is</string>
+
+    <string name="text_menutype_home">โฆษณา</string>
+    <string name="text_menutype_snack">ขนมขบเคี้ยว</string>
+    <string name="text_menutype_meal">อาหารจานหลัก</string>
+    <string name="text_menutype_sweet">ของหวาน</string>
+    <string name="text_menutype_drink">เครื่องดื่ม</string>
+    <string name="text_menutype_setting">ตั้งค่า</string>
+    <string name="text_menutype_history">ประวัติการสั่งสินค้า</string>
+    
+    <string name="activity_shoppingcart">ตะกร้าสินค้า</string>
+    <string name="activity_map">แผนที่</string>
+    <string name="activity_summary">สรุปราคา</string>
+
 </resources>

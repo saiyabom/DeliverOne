@@ -25,7 +25,11 @@
             style="@style/CardTitle"
             android:layout_alignBottom="@+id/imageView"
             android:id="@+id/food_name"
-            tools:text="Title"/>
+            tools:text="Title"
+            android:background="@color/TransparentBackgroundText"
+            android:padding="10dp"
+
+            />
 
         <TextView
             android:layout_width="fill_parent"

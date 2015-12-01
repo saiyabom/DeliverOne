@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dizarale.deliverone.R;
-import com.dizarale.deliverone.config.AppConstant;
+
 import com.dizarale.deliverone.config.AppSharedPreferences;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
@@ -22,21 +22,20 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 public class SummaryActivity extends BaseActivity{
     private final String LOG_TAG = SummaryActivity.class.getSimpleName();
     TextView costTotalText;
     TextView costDeliver;
-
-    //GetSummaryJsonData getSummaryJsonData;
     Toast toastsuccess,toastfail;
 
     private EditText commentOrder;
     private Button confirmButton;
+    private String responseCode;
 
     private final String CUS_TEL="cus_tel", ORDER_LAT="order_lat", ORDER_LONG="order_long", ORDER_DETAIL="order_detail";
 
@@ -47,8 +46,6 @@ public class SummaryActivity extends BaseActivity{
 
     private Intent intent;
     private ProgressDialog pDialog;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +59,6 @@ public class SummaryActivity extends BaseActivity{
 
         confirmButton = (Button) findViewById(R.id.send_order_button);
 
-
-
         actAsSummary();
         activateToolbarWithHomeEnabled();
         commentOrder = (EditText) findViewById(R.id.comment_order);
@@ -73,11 +68,7 @@ public class SummaryActivity extends BaseActivity{
         longitude = intent.getStringExtra("longitude");
         costTotalText = (TextView) findViewById(R.id.total_cost);
 
-
         costDeliver = (TextView) findViewById(R.id.deliver_cost);
-
-
-
 
         toastsuccess = Toast.makeText(this,"Confirm OK", Toast.LENGTH_LONG );
         toastfail = Toast.makeText(this, "not find", Toast.LENGTH_LONG);
@@ -88,65 +79,10 @@ public class SummaryActivity extends BaseActivity{
                 sendConfirmAll();
             }
         });
-        //getTotle();
-       //
-
-
-
-
     }
-    /*public void postLatLong(String lat, String lon) {
 
-        RequestBody formBody = new FormEncodingBuilder()
-                .add("cus_tel", super.testPhone).add("order_lat", lat)
-                .add("order_long", lon)
-                .add("order_detail","").build();
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Request.Builder builder = new Request.Builder();
-        Request request = builder.url(BASE_URL + "/preorderdetaildistance").post(formBody).build();
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-                Log.d(LOG_TAG, e.getMessage());
-            }
-
-            @Override
-            public void onResponse(Response response) throws IOException {
-                int food_cost;
-                int delivery_cost;
-                int total;
-                String result = response.body().string().toString();
-                //Log.v("Response Message", response.body().string());
-                //toCost(response.body().string());
-                JSONObject jsonObject= null;
-                try {
-                    String test = result;
-                    jsonObject = new JSONObject(test);
-                    food_cost = jsonObject.getInt("food_cost");
-                    delivery_cost = jsonObject.getInt("delivery_cost");
-                    total = food_cost + delivery_cost;
-                    Log.v(LOG_TAG, "Json result: food_cost= " + food_cost);
-                    if(total !=0){
-
-                        SummaryActivity.this.costTotalText.setText(Integer.toString(total));
-                        SummaryActivity.this.costDeliver.setText(Integer.toString(delivery_cost));
-                    }
-                    else{
-                        startShoppingActivity();
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-
-            }
-        });
-
-    }
-    */
-    public void sendConfirmAll(){
+    public void sendConfirmAll() {
+        //showpDialog();
         RequestBody formBody = new FormEncodingBuilder()
                 .add(CUS_TEL, testPhone)
                 .add(ORDER_DETAIL, commentOrder.getText().toString()).build();
@@ -161,36 +97,23 @@ public class SummaryActivity extends BaseActivity{
 
             @Override
             public void onResponse(Response response) throws IOException {
-
-                if (response != null) {
-                    String res = response.body().string();
-                    if (res.contains("delete order suc")) {
-                        Intent intent = new Intent(SummaryActivity.this, MenuActivity.class);
-                        startActivity(intent);
-                        finish();
-
-
-                    } else if (res.contains("not find")) {
-                        Log.v(LOG_TAG, res);
-
-                    } else {
-                        Log.v(LOG_TAG, res);
-                    }
+                responseCode = response.body().string();
+                if(responseCode!=null){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            openDialog(responseCode);
+                        }
+                    });
                 }
-
             }
         });
     }
-
-
     @Override
     protected void onResume() {
         super.onResume();
-        //postLatLong(latitude, longitude);
         costDeliver.setText(this.intent.getStringExtra("delivery_cost"));
         costTotalText.setText(this.intent.getStringExtra("total"));
-
-
     }
 
     @Override
@@ -228,11 +151,25 @@ public class SummaryActivity extends BaseActivity{
         if (!pDialog.isShowing())
             pDialog.show();
     }
-
     private void hidepDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }
+    public void openDialog(String codeConfirmation){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(R.string.text_response_code_confirmation+": "+codeConfirmation);
+
+        alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                Intent intent = new Intent(SummaryActivity.this, MenuActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
 }

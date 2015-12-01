@@ -77,5 +77,15 @@ public class AppSharedPreferences {
         android.content.SharedPreferences sharedPreferences = context.getSharedPreferences(AppConstant.PREF_PHONE, Context.MODE_PRIVATE);
         return sharedPreferences.getString(AppConstant.PREF_PHONE_VALUE, null);
     }
+    public static void setNotification(Context context,boolean isNotificationOn){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(AppConstant.PREF_PHONE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("Notification",isNotificationOn);
+        editor.apply();
+    }
+    public static boolean getNotifaction(Context context){
+        android.content.SharedPreferences sharedPreferences = context.getSharedPreferences(AppConstant.PREF_PHONE, Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean("Notification",true);
+    }
 
 }

@@ -30,6 +30,7 @@ import com.dizarale.deliverone.R;
 import com.dizarale.deliverone.activity.HistoryOrderAcitvity;
 import com.dizarale.deliverone.activity.MainActivity;
 import com.dizarale.deliverone.activity.ShoppingCartActivity;
+import com.dizarale.deliverone.config.AppSharedPreferences;
 import com.google.android.gms.gcm.GcmListenerService;
 
 public class MyGcmListenerService extends GcmListenerService {
@@ -58,6 +59,14 @@ public class MyGcmListenerService extends GcmListenerService {
             // normal downstream message.
         }
 
+        /* Check the setting is Notification on or not*/
+        if(AppSharedPreferences.getNotifaction(this)){
+            sendNotification(message);
+        }else{
+            if(mt.equals("status")){
+                sendNotification(message);
+            }
+        }
         // [START_EXCLUDE]
         /**
          * Production applications would usually process the message here.
@@ -70,7 +79,7 @@ public class MyGcmListenerService extends GcmListenerService {
          * In some cases it may be useful to show a notification indicating to the user
          * that a message was received.
          */
-        sendNotification(message);
+
         // [END_EXCLUDE]
     }
     // [END receive_message]

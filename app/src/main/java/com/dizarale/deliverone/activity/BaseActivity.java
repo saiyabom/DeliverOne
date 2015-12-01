@@ -1,11 +1,16 @@
 package com.dizarale.deliverone.activity;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 
 import com.dizarale.deliverone.R;
@@ -32,9 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 200;
 
-    public String testPhone="0874969990";
-    public String testDes="Sound Bad";
-    public String testNum="6";
+    public String testPhone="11111111";
 
     // Operation type (what is being executed)
     public static final int MENU = 0;
@@ -99,23 +102,23 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
     public void actAsSnack(){
         mType = SNACK;
-        mTitle = AppConstant.DRAWER_SNACK;
+        mTitle = getString(R.string.text_menutype_snack);
     }
     public void actAsMeal(){
         mType = MEAL;
-        mTitle = AppConstant.DRAWER_MEAL;
+        mTitle = getString(R.string.text_menutype_meal);
     }
     public void actAsSweet(){
         mType = SWEET;
-        mTitle = AppConstant.DRAWER_SWEET;
+        mTitle = getString(R.string.text_menutype_sweet);
     }
     public void actAsDrink(){
         mType = DRINK;
-        mTitle = AppConstant.DRAWER_DRINK;
+        mTitle = getString(R.string.text_menutype_drink);
     }
     public void actAsHistoryOrder(){
         mType = HISTORY_ORDER;
-        mTitle = AppConstant.HISTORY_ORDER;
+        mTitle = getString(R.string.text_menutype_history);
     }
 
     public Toolbar activateToolbar(){
@@ -125,23 +128,23 @@ public abstract class BaseActivity extends AppCompatActivity {
                 setSupportActionBar(mToolbar);
                 switch(mType){
                     case MENU:
-                        getSupportActionBar().setTitle(AppConstant.TOOLBAR_TITLE);
+                        getSupportActionBar().setTitle(getString(R.string.text_menutype_home));
 
                         break;
                     case SNACK:
-                        getSupportActionBar().setTitle(AppConstant.DRAWER_SNACK);
+                        getSupportActionBar().setTitle(getString(R.string.text_menutype_snack));
 
                         break;
                     case MEAL:
-                        getSupportActionBar().setTitle(AppConstant.DRAWER_MEAL);
+                        getSupportActionBar().setTitle(getString(R.string.text_menutype_meal));
 
                     break;
                     case SWEET:
-                        getSupportActionBar().setTitle(AppConstant.DRAWER_SWEET);
+                        getSupportActionBar().setTitle(getString(R.string.text_menutype_sweet));
 
                         break;
                     case DRINK:
-                        getSupportActionBar().setTitle(AppConstant.DRAWER_DRINK);
+                        getSupportActionBar().setTitle(getString(R.string.text_menutype_drink));
 
                         break;
                 }
@@ -187,13 +190,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         //Few items, so added manually
 
         List<NavigationDrawerItem> items = new ArrayList<>();
-        items.add(new NavigationDrawerItem(android.R.drawable.ic_lock_power_off, AppConstant.DRAWER_HOME));
-        items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_gallery, AppConstant.DRAWER_SNACK));
-        items.add(new NavigationDrawerItem(android.R.drawable.ic_btn_speak_now, AppConstant.DRAWER_MEAL));
-        items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_send, AppConstant.DRAWER_SWEET));
-        items.add(new NavigationDrawerItem(android.R.drawable.ic_btn_speak_now, AppConstant.DRAWER_DRINK));
-        items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_preferences, AppConstant.DRAWER_SETTINGS));
-        items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_help, AppConstant.DRAWER_HISTORY_ORDER));
+        items.add(new NavigationDrawerItem(android.R.drawable.ic_lock_power_off, getString(R.string.text_menutype_home)));
+        items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_gallery, getString(R.string.text_menutype_snack)));
+        items.add(new NavigationDrawerItem(android.R.drawable.ic_btn_speak_now, getString(R.string.text_menutype_meal)));
+        items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_send, getString(R.string.text_menutype_sweet)));
+        items.add(new NavigationDrawerItem(android.R.drawable.ic_btn_speak_now, getString(R.string.text_menutype_drink)));
+        items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_preferences, getString(R.string.text_menutype_setting)));
+        items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_help, getString(R.string.text_menutype_history)));
 
         mDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         mDrawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
@@ -262,5 +265,32 @@ public abstract class BaseActivity extends AppCompatActivity {
         // intent.putExtra(Intents.Scan.PROMPT_MESSAGE, "type your prompt message");
         intent.setClass(this, CaptureActivity.class);
         startActivityForResult(intent, REQUEST_CODE);
+    }
+    public void showDialog(final Context context){
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.dialog_box_fragment);
+        dialog.setTitle("Setting");
+        CheckBox checkNotification = (CheckBox) dialog.findViewById(R.id.check_notification);
+                /* if(PreferenceNotification ==true){*/
+        checkNotification.setChecked(AppSharedPreferences.getNotifaction(context));
+        checkNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                AppSharedPreferences.setNotification(context,isChecked);
+            }
+        });
+
+
+        // set the custom dialog components - text, image and button
+        Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+        // if button is clicked, close the custom dialog
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 }
