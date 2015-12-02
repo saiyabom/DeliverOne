@@ -52,7 +52,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Price"
+                android:text="@string/text_cost"
                 android:textSize="16dp"
                 android:textStyle="bold"
                 android:id="@+id/price_text"/>
@@ -68,7 +68,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Number"
+                android:text="@string/text_number"
                 android:textSize="16dp"
                 android:textStyle="bold"
                 android:id="@+id/number_text"
@@ -81,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            android:text="lorem kldnfosdklamklvmlckxjvlsjfkljfiojiojgiojgmiomvkasdmklasjgjkaiodsjsjknvaskn"
+            android:text="lorem kld"
             android:id="@+id/food_detail"
             android:layout_below="@id/price"/>
         <LinearLayout
@@ -91,7 +91,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Comment :"
+                android:text="@string/text_comment"
                 android:layout_below="@id/food_detail"
                 android:textColor="@color/cardview_dark_background"
                 android:textStyle="bold"
@@ -121,7 +121,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="add"
+        android:text="@string/text_add_button"
         android:onClick="addFoodtoCart"
         android:id="@+id/tocart_button"
         android:layout_gravity="bottom"/>

@@ -80,12 +80,13 @@ public class FoodDetailActivity extends BaseActivity {
 
         Intent intent = getIntent();
         foodItem = (FoodItem) intent.getSerializableExtra(AppConstant.FOODITEM_TRANSFER);
-        actAsFoodDetail(foodItem.getMenuName());
+        //actAsFoodDetail(foodItem.getMenuName());
+        actAsFoodDetail(foodItem.getMenuNameThai());
         activateToolbarWithHomeEnabled();
 
         imageFood = (ImageView) findViewById(R.id.food_image);
         nameFood = (TextView) findViewById(R.id.food_name);
-        nameFood.setText(foodItem.getMenuName());
+        nameFood.setText(foodItem.getMenuNameThai());
         priceFood = (TextView) findViewById(R.id.food_price);
         priceFood.setText(foodItem.getMenuCost());
         detailFood = (TextView) findViewById(R.id.food_detail);

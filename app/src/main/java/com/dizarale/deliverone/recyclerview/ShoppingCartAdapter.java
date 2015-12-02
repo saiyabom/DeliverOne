@@ -100,8 +100,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     @Override
     public void onBindViewHolder(ShoppingCartHolder holder, int position) {
         ShoppingCart shoppingCart = mShoppingCartList.get(position);
-        Log.d(LOG_TAG,"Processing: "+shoppingCart.getMenuName() + "------>" +Integer.toString(position));
-        holder.mName.setText(mShoppingCartList.get(position).getMenuName());
+        Log.d(LOG_TAG, "Processing: " + shoppingCart.getMenuName() + "------>" + Integer.toString(position));
+        //holder.mName.setText(mShoppingCartList.get(position).getMenuName());
+        holder.mName.setText(mShoppingCartList.get(position).getMenuNameThai());
         // We have to deal with a note or a note list here, so
         // check for both types and process accordingly
         holder.mNum.setText(mShoppingCartList.get(position).getMenuNum());

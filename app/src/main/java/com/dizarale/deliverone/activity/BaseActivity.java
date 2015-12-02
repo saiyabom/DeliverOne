@@ -80,15 +80,15 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void actAsMenu(){
         mType = MENU;
-        mTitle = AppConstant.TOOLBAR_TITLE;
+        mTitle = getString(R.string.text_menutype_home);
     }
     public void actAsShoppingCart(){
         mType = SHOPPING_CART;
-        mTitle = AppConstant.SHOPPING_CART;
+        mTitle = getString(R.string.activity_shoppingcart);
     }
     public void actAsMaps(){
         mType = MAP;
-        mTitle = AppConstant.MAP;
+        mTitle = getString(R.string.activity_map);
     }
     public void actAsFoodDetail(String name){
         mType = FOOD_DETAIL;
@@ -98,7 +98,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
     public void actAsSummary(){
         mType = SUMMARY;
-        mTitle = AppConstant.SUMMARY;
+        mTitle = getString(R.string.activity_summary);
     }
     public void actAsSnack(){
         mType = SNACK;
@@ -158,13 +158,13 @@ public abstract class BaseActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             switch(mType){
                 case SHOPPING_CART:
-                    getSupportActionBar().setTitle(AppConstant.SHOPPING_CART);
+                    getSupportActionBar().setTitle(mTitle);
                     break;
                 case MAP:
-                    getSupportActionBar().setTitle(AppConstant.MAP);
+                    getSupportActionBar().setTitle(mTitle);
                     break;
                 case SUMMARY:
-                    getSupportActionBar().setTitle(AppConstant.SUMMARY);
+                    getSupportActionBar().setTitle(mTitle);
                     break;
                 case FOOD_DETAIL:
                     getSupportActionBar().setTitle(mTitle);
@@ -195,7 +195,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         items.add(new NavigationDrawerItem(android.R.drawable.ic_btn_speak_now, getString(R.string.text_menutype_meal)));
         items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_send, getString(R.string.text_menutype_sweet)));
         items.add(new NavigationDrawerItem(android.R.drawable.ic_btn_speak_now, getString(R.string.text_menutype_drink)));
-        items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_preferences, getString(R.string.text_menutype_setting)));
         items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_help, getString(R.string.text_menutype_history)));
 
         mDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
@@ -231,13 +230,15 @@ public abstract class BaseActivity extends AppCompatActivity {
                         actAsDrink();
                         break;
                     case 5:
-                        AppSharedPreferences.setHasPhoneNumber(BaseActivity.this,AppConstant.PREF_PHONE,false);
-                        mNextActivity = MainActivity.class;
-                        break;
-                    case 6:
+                        /*AppSharedPreferences.setHasPhoneNumber(BaseActivity.this,AppConstant.PREF_PHONE,false);
+                        mNextActivity = MainActivity.class;*/
                         mNextActivity = HistoryOrderAcitvity.class;
                         actAsHistoryOrder();
                         break;
+                    /*case 6:
+                        mNextActivity = HistoryOrderAcitvity.class;
+                        actAsHistoryOrder();
+                        break;*/
                     /*default:
                         mNextActivity = HelpFeedActivity.class;
                         break;*/

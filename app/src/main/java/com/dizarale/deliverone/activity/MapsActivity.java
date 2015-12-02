@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.dizarale.deliverone.R;
 import com.dizarale.deliverone.config.AppConstant;
 import com.dizarale.deliverone.config.AppSharedPreferences;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -102,9 +103,12 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback{
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMyLocationEnabled(true);
-        latLng = new LatLng((double) 0, (double) 0);
+        latLng = new LatLng((double) 13.7248946, (double) 100.4930262);
 
         mMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
+       // mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
 
         mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
             @Override

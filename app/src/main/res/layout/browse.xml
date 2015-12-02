@@ -17,7 +17,7 @@
     <TextView android:id="@+id/browse_name"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="4dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:textColor="@color/PrimaryTextColor"
@@ -43,17 +43,17 @@
         android:textColor="@color/material_deep_teal_200"/>
 
     <TextView
-        android:layout_width="45dp"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:id="@+id/browse_number"
         android:text="3"
         android:textSize="15dp"/>
     <TextView
-        android:layout_width="65dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="300"
-        android:textSize="20dp"
+        android:paddingLeft="5dp"
+        android:text="3000"
+        android:textSize="16dp"
         android:textColor="@color/md_red_700"
         android:textStyle="bold"
         android:id="@+id/browse_total_cost"/>

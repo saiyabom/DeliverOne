@@ -38,4 +38,19 @@
     <string name="activity_map">แผนที่</string>
     <string name="activity_summary">สรุปราคา</string>
 
+    <string name="text_cost">ราคา</string>
+    <string name="text_number">จำนวน</string>
+    <string name="text_comment">หมายเหตุ :</string>
+    <string name="text_add_button">เพิ่มลงในตะกร้าสินค้า</string>
+
+    <string name="text_location_button">กำหนดพิกัดส่ง</string>
+    <string name="text_confirm_location_button">ยืนยันพิกัดส่ง</string>
+    <string name="text_delivery_cost">ค่าส่ง</string>
+    <string name="text_cost_total">ทั้งหมด</string>
+    <string name="text_send_order_button">ยืนยัน</string>
+
+    <string name="text_bath">บาท</string>
+
+
+
 </resources>

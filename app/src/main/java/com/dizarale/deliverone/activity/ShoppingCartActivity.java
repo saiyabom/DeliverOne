@@ -71,9 +71,10 @@ public class ShoppingCartActivity extends BaseActivity{
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(true);
+        actAsShoppingCart();
         setContentView(R.layout.activity_shopping_cart);
         mShoppingCartList = new ArrayList<ShoppingCart>();
-        actAsShoppingCart();
+
         Intent intentFromMapFault = getIntent();
         faulty = intentFromMapFault.getBooleanExtra(AppConstant.MISS_LOCATION,false);
 

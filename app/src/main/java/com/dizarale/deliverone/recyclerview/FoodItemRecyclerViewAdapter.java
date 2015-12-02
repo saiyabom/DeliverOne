@@ -80,8 +80,9 @@ public class FoodItemRecyclerViewAdapter extends RecyclerView.Adapter<FoodItemIm
         Log.v(LOG_TAG, foodItem.toString());
         //Log.d(LOG_TAG,"Processing: " + foodItem.getmName() + "--> " + Integer.toString(position));
 
-        holder.foodName.setText(foodItem.getMenuName());
-        holder.description.setText("cost: " + foodItem.getMenuCost());
+        //holder.foodName.setText(foodItem.getMenuName());
+        holder.foodName.setText(foodItem.getMenuNameThai());
+        holder.description.setText(foodItem.getMenuCost());
 
 
 
