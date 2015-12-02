@@ -18,11 +18,13 @@ import java.util.List;
 public class NavigationDrawerAdapter extends BaseAdapter {
     private List<NavigationDrawerItem> mDrawerItems;
     private LayoutInflater mLayoutInflater;
+    private Context mContext;
 
     public NavigationDrawerAdapter(Context context, List<NavigationDrawerItem> drawerItems) {
         super();
         mDrawerItems = drawerItems;
         mLayoutInflater = LayoutInflater.from(context);
+        mContext = context;
     }
 
     @Override
@@ -51,6 +53,7 @@ public class NavigationDrawerAdapter extends BaseAdapter {
 
         ImageView icon = (ImageView) convertView.findViewById(R.id.navigation_item_icon);
         icon.setImageResource(navigationDrawerItem.getIconId());
+        icon.setColorFilter(mContext.getResources().getColor(R.color.md_white_1000));
 
         return convertView;
     }

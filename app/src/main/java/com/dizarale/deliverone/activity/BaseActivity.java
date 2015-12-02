@@ -190,12 +190,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         //Few items, so added manually
 
         List<NavigationDrawerItem> items = new ArrayList<>();
-        items.add(new NavigationDrawerItem(android.R.drawable.ic_lock_power_off, getString(R.string.text_menutype_home)));
-        items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_gallery, getString(R.string.text_menutype_snack)));
-        items.add(new NavigationDrawerItem(android.R.drawable.ic_btn_speak_now, getString(R.string.text_menutype_meal)));
-        items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_send, getString(R.string.text_menutype_sweet)));
-        items.add(new NavigationDrawerItem(android.R.drawable.ic_btn_speak_now, getString(R.string.text_menutype_drink)));
-        items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_help, getString(R.string.text_menutype_history)));
+
+        items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_gallery, getString(R.string.text_menutype_home)));
+        items.add(new NavigationDrawerItem(R.drawable.snack, getString(R.string.text_menutype_snack)));
+        items.add(new NavigationDrawerItem(R.drawable.meal, getString(R.string.text_menutype_meal)));
+        items.add(new NavigationDrawerItem(R.drawable.sweet, getString(R.string.text_menutype_sweet)));
+        items.add(new NavigationDrawerItem(R.drawable.drinking, getString(R.string.text_menutype_drink)));
+        items.add(new NavigationDrawerItem(android.R.drawable.ic_menu_recent_history, getString(R.string.text_menutype_history)));
 
         mDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         mDrawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
