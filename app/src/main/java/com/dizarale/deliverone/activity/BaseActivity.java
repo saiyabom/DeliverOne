@@ -72,7 +72,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public static String mTitle = AppConstant.TOOLBAR_TITLE;
 
-    public static int mType = SNACK;
+    public static int mType = MENU;
 
     protected Toolbar mToolbar;
 

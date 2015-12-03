@@ -45,6 +45,7 @@ public class MenuActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mType = String.valueOf(BaseActivity.mType);
+        actAsMenu();
         activateToolbar();
         setUpNavigationDrawer();
         pDialog = new ProgressDialog(this);
@@ -85,6 +86,7 @@ public class MenuActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         Call<List<FoodItem>> call = service.loadListFoodItem("1", mType);
         Log.v(LOG_TAG, service.toString());
         call.enqueue(new Callback<List<FoodItem>>() {

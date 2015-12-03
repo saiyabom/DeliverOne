@@ -52,6 +52,10 @@ public class MainActivity extends BaseActivity {
                 @Override
                 public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
+                    if (checkPlayServices()) {
+                        // Start IntentService to register this application with GCM.
+                        startService(intentGCM);
+                    }
 
                     Intent mainIntent = new Intent(MainActivity.this, MenuActivity.class);
                     startActivity(mainIntent);
